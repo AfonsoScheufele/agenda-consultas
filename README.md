@@ -4,11 +4,12 @@ Aplicação web em **ASP.NET Core MVC** para gerenciamento de médicos e consult
 
 ## Tema
 
-**Agenda de consultas** — relacionamento 1:N entre `Médico` e `Consulta`.
+**Agenda de consultas** - relacionamento 1:N entre `Médico` e `Consulta`.
 
 ## Integrantes
 
-- *(preencher com os nomes do grupo)*
+- Afonso
+- Bernardo
 
 ## Como executar
 
@@ -16,8 +17,3 @@ Aplicação web em **ASP.NET Core MVC** para gerenciamento de médicos e consult
 dotnet restore
 dotnet run
 ```
-
-## Estrutura inicial
-
-- `Models/` — entidades do sistema
-- Projeto ASP.NET Core MVC (.NET 10)
