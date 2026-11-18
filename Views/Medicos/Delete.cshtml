@@ -1,0 +1,51 @@
+@model Medico
+@{
+    ViewData["Title"] = "Excluir médico";
+}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="page-header centered">
+            <div>
+                <h1 class="page-title">Excluir médico</h1>
+            </div>
+        </div>
+
+        @if (ViewBag.Aviso is string aviso)
+        {
+            <div class="alert alert-warning">@aviso</div>
+        }
+        else
+        {
+            <p class="text-danger text-center">Tem certeza que deseja excluir este médico?</p>
+        }
+
+        <dl class="row">
+            <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Nome)</dt>
+            <dd class="col-sm-8">@Model.Nome</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(m => m.CRM)</dt>
+            <dd class="col-sm-8">@Model.CRM</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Especialidade)</dt>
+            <dd class="col-sm-8">@Model.Especialidade</dd>
+        </dl>
+
+        @if (ViewBag.Aviso is null)
+        {
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex gap-2 justify-content-center">
+                    <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+                    <a class="btn btn-ghost" asp-action="Index">Cancelar</a>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="text-center">
+                <a class="btn btn-ghost" asp-action="Index">Voltar</a>
+            </div>
+        }
+    </div>
+</div>

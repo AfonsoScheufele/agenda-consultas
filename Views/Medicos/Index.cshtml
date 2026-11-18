@@ -1,0 +1,81 @@
+@model IEnumerable<Medico>
+@{
+    ViewData["Title"] = "Médicos";
+    string ordenarPor = ViewBag.OrdenarPor as string ?? "nome";
+    string ordem = ViewBag.Ordem as string ?? "asc";
+
+    string LinkOrdenacao(string coluna)
+    {
+        var novaOrdem = (ordenarPor == coluna && ordem == "asc") ? "desc" : "asc";
+        return Url.Action("Index", new { busca = ViewBag.Busca, ordenarPor = coluna, ordem = novaOrdem })!;
+    }
+
+    string Indicador(string coluna) =>
+        ordenarPor == coluna ? (ordem == "asc" ? " ▲" : " ▼") : "";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Médicos</h1>
+    </div>
+    <a class="btn btn-ac text-white" asp-action="Create">Novo médico</a>
+</div>
+
+<form method="get" class="row g-2 filter-row mb-3">
+    <div class="col-md-8">
+        <input type="text" name="busca" value="@ViewBag.Busca" class="form-control"
+               placeholder="Buscar por nome, especialidade ou CRM" />
+    </div>
+    <div class="col-md-4 d-flex gap-2">
+        <button type="submit" class="btn btn-outline-ac">Buscar</button>
+        <a class="btn btn-ghost" asp-action="Index">Limpar</a>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-ac align-middle">
+        <thead>
+            <tr>
+                <th><a href="@LinkOrdenacao("nome")">Nome@(Indicador("nome"))</a></th>
+                <th><a href="@LinkOrdenacao("crm")">CRM@(Indicador("crm"))</a></th>
+                <th><a href="@LinkOrdenacao("especialidade")">Especialidade@(Indicador("especialidade"))</a></th>
+                <th>Telefone</th>
+                <th><a href="@LinkOrdenacao("email")">E-mail@(Indicador("email"))</a></th>
+                <th class="text-end">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6">
+                    <div class="empty-state">
+                        <strong>Nenhum médico cadastrado</strong>
+                        Clique em “Novo médico” para começar.
+                    </div>
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nome</td>
+                    <td>@item.CRM</td>
+                    <td>@item.Especialidade</td>
+                    <td>@item.Telefone</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <div class="actions-row">
+                            <a class="btn btn-sm btn-ghost" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                            <a class="btn btn-sm btn-outline-ac" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>
