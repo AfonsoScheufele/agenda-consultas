@@ -1,0 +1,315 @@
+:root {
+  --ac-ink: #14323f;
+  --ac-muted: #5b7380;
+  --ac-line: #d5e1e7;
+  --ac-surface: rgba(255, 255, 255, 0.78);
+  --ac-surface-solid: #f7fbfc;
+  --ac-accent: #0f766e;
+  --ac-accent-dark: #0b5a54;
+  --ac-accent-soft: #d8f3ef;
+  --ac-danger: #b42318;
+  --ac-ok: #1b7a4a;
+  --ac-warn: #9a6700;
+  --ac-radius: 14px;
+  --ac-shadow: 0 10px 30px rgba(20, 50, 63, 0.08);
+}
+
+html {
+  font-size: 15px;
+  position: relative;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ac-ink);
+  font-family: "Figtree", "Segoe UI", sans-serif;
+  background-color: #f7f7f5;
+}
+
+h1, h2, h3, .navbar-brand, .page-title {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--ac-accent-dark);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+  padding-top: 1.25rem;
+  padding-bottom: 2.5rem;
+}
+
+.navbar-ac {
+  background-color: #f7f7f5;
+  border-bottom: 1px solid #e6e6e1;
+}
+
+.navbar-ac .navbar-toggler {
+  border-color: var(--ac-line);
+}
+
+.navbar-ac .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(20, 50, 63, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-ac .navbar-brand {
+  color: var(--ac-ink);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.navbar-ac .nav-link {
+  color: var(--ac-muted);
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  margin-right: 0.2rem;
+}
+
+.navbar-ac .nav-link:hover,
+.navbar-ac .nav-link:focus {
+  color: var(--ac-accent-dark);
+  background: var(--ac-accent-soft);
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-title {
+  margin: 0;
+  font-size: clamp(1.7rem, 2vw, 2.1rem);
+  font-weight: 600;
+}
+
+.page-subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--ac-muted);
+}
+
+.content-center {
+  width: 100%;
+  max-width: 560px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+}
+
+.page-header.centered {
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  .stat-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.stat {
+  background: var(--ac-surface);
+  border: 1px solid var(--ac-line);
+  border-radius: var(--ac-radius);
+  padding: 1rem 1.1rem;
+  box-shadow: var(--ac-shadow);
+}
+
+.stat-label {
+  color: var(--ac-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0.2rem;
+}
+
+.stat-value.is-accent { color: var(--ac-accent-dark); }
+.stat-value.is-ok { color: var(--ac-ok); }
+.stat-value.is-danger { color: var(--ac-danger); }
+
+.table-ac {
+  margin-bottom: 0;
+}
+
+.table-ac thead th {
+  color: var(--ac-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom-width: 1px;
+  border-color: var(--ac-line);
+  white-space: nowrap;
+}
+
+.table-ac thead th a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.table-ac thead th a:hover {
+  color: var(--ac-accent-dark);
+}
+
+.table-ac td {
+  vertical-align: middle;
+  border-color: var(--ac-line);
+}
+
+.table-ac tbody tr:hover {
+  background: rgba(15, 118, 110, 0.04);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2.2rem 1rem;
+  color: var(--ac-muted);
+}
+
+.empty-state strong {
+  display: block;
+  color: var(--ac-ink);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.btn-ac,
+.btn-outline-ac,
+.btn-ghost,
+a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.25;
+  vertical-align: middle;
+}
+
+.btn-ac {
+  --bs-btn-bg: var(--ac-accent);
+  --bs-btn-border-color: var(--ac-accent);
+  --bs-btn-hover-bg: var(--ac-accent-dark);
+  --bs-btn-hover-border-color: var(--ac-accent-dark);
+  --bs-btn-active-bg: var(--ac-accent-dark);
+  --bs-btn-active-border-color: var(--ac-accent-dark);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+}
+
+.btn-outline-ac {
+  --bs-btn-color: var(--ac-accent-dark);
+  --bs-btn-border-color: #9ecac4;
+  --bs-btn-hover-bg: var(--ac-accent-soft);
+  --bs-btn-hover-border-color: var(--ac-accent);
+  --bs-btn-hover-color: var(--ac-accent-dark);
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+}
+
+.btn-ghost {
+  --bs-btn-color: var(--ac-muted);
+  --bs-btn-border-color: var(--ac-line);
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #b7c8d0;
+  --bs-btn-hover-color: var(--ac-ink);
+  --bs-btn-bg: transparent;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+}
+
+.form-control,
+.form-select {
+  border-color: #c5d5dc;
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--ac-accent);
+  box-shadow: 0 0 0 0.2rem rgba(15, 118, 110, 0.15);
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--ac-ink);
+}
+
+.badge-status {
+  display: inline-block;
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.badge-status.agendada {
+  background: var(--ac-accent-soft);
+  color: var(--ac-accent-dark);
+}
+
+.badge-status.realizada {
+  background: #e4f6ec;
+  color: var(--ac-ok);
+}
+
+.badge-status.cancelada {
+  background: #fde8e6;
+  color: var(--ac-danger);
+}
+
+.alert {
+  border: none;
+  border-radius: 12px;
+}
+
+.actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.filter-row .form-control,
+.filter-row .form-select {
+  background: rgba(255, 255, 255, 0.9);
+}

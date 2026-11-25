@@ -31,6 +31,5 @@ public class Consulta
     [Display(Name = "Status")]
     public StatusConsulta Status { get; set; } = StatusConsulta.Agendada;
 
-    // Propriedade de navegação preenchida pelo repositório (não persistida em banco)
     public Medico? Medico { get; set; }
 }

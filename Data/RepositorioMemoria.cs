@@ -2,10 +2,6 @@ using AgendaConsultas.Models;
 
 namespace AgendaConsultas.Data;
 
-/// <summary>
-/// Armazena médicos e consultas em listas estáticas (em memória).
-/// Os dados são perdidos ao reiniciar a aplicação.
-/// </summary>
 public static class RepositorioMemoria
 {
     private static int _proximoMedicoId = 1;

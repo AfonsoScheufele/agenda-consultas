@@ -6,7 +6,6 @@ namespace AgendaConsultas.Controllers;
 
 public class MedicosController : Controller
 {
-    // GET: Medicos
     public IActionResult Index(string? busca, string? ordenarPor, string? ordem)
     {
         var lista = RepositorioMemoria.ListarMedicos().AsEnumerable();
@@ -36,7 +35,6 @@ public class MedicosController : Controller
         return View(lista.ToList());
     }
 
-    // GET: Medicos/Details/5
     public IActionResult Details(int id)
     {
         var medico = RepositorioMemoria.ObterMedico(id);
@@ -46,13 +44,11 @@ public class MedicosController : Controller
         return View(medico);
     }
 
-    // GET: Medicos/Create
     public IActionResult Create()
     {
         return View();
     }
 
-    // POST: Medicos/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Create(Medico medico)
@@ -65,7 +61,6 @@ public class MedicosController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    // GET: Medicos/Edit/5
     public IActionResult Edit(int id)
     {
         var medico = RepositorioMemoria.ObterMedico(id);
@@ -75,7 +70,6 @@ public class MedicosController : Controller
         return View(medico);
     }
 
-    // POST: Medicos/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Edit(int id, Medico medico)
@@ -93,7 +87,6 @@ public class MedicosController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    // GET: Medicos/Delete/5
     public IActionResult Delete(int id)
     {
         var medico = RepositorioMemoria.ObterMedico(id);
@@ -106,7 +99,6 @@ public class MedicosController : Controller
         return View(medico);
     }
 
-    // POST: Medicos/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public IActionResult DeleteConfirmed(int id)
