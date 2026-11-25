@@ -1,0 +1,105 @@
+@model IEnumerable<Consulta>
+@{
+    ViewData["Title"] = "Consultas";
+    string ordenarPor = ViewBag.OrdenarPor as string ?? "datahora";
+    string ordem = ViewBag.Ordem as string ?? "asc";
+
+    string LinkOrdenacao(string coluna)
+    {
+        var novaOrdem = (ordenarPor == coluna && ordem == "asc") ? "desc" : "asc";
+        return Url.Action("Index", new
+        {
+            busca = ViewBag.Busca,
+            status = ViewBag.Status,
+            ordenarPor = coluna,
+            ordem = novaOrdem
+        })!;
+    }
+
+    string Indicador(string coluna) =>
+        ordenarPor == coluna ? (ordem == "asc" ? " ▲" : " ▼") : "";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Consultas</h1>
+    </div>
+    <a class="btn btn-ac text-white" asp-action="Create">Nova consulta</a>
+</div>
+
+<form method="get" class="row g-2 filter-row mb-3">
+    <div class="col-md-5">
+        <input type="text" name="busca" value="@ViewBag.Busca" class="form-control"
+               placeholder="Buscar por paciente, médico ou motivo" />
+    </div>
+    <div class="col-md-3">
+        <select name="status" class="form-select" asp-items="ViewBag.StatusLista">
+            <option value="">Todos os status</option>
+        </select>
+    </div>
+    <div class="col-md-4 d-flex gap-2">
+        <button type="submit" class="btn btn-outline-ac">Filtrar</button>
+        <a class="btn btn-ghost" asp-action="Index">Limpar</a>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-ac align-middle">
+        <thead>
+            <tr>
+                <th><a href="@LinkOrdenacao("datahora")">Data/hora@(Indicador("datahora"))</a></th>
+                <th><a href="@LinkOrdenacao("paciente")">Paciente@(Indicador("paciente"))</a></th>
+                <th><a href="@LinkOrdenacao("medico")">Médico@(Indicador("medico"))</a></th>
+                <th><a href="@LinkOrdenacao("motivo")">Motivo@(Indicador("motivo"))</a></th>
+                <th><a href="@LinkOrdenacao("status")">Status@(Indicador("status"))</a></th>
+                <th class="text-end">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6">
+                    <div class="empty-state">
+                        <strong>Nenhuma consulta cadastrada</strong>
+                        Cadastre um médico antes e depois agende uma consulta.
+                    </div>
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DataHora.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.NomePaciente</td>
+                    <td>@(item.Medico?.Nome ?? "-")</td>
+                    <td>@item.Motivo</td>
+                    <td>
+                        @switch (item.Status)
+                        {
+                            case StatusConsulta.Agendada:
+                                <span class="badge-status agendada">Agendada</span>
+                                break;
+                            case StatusConsulta.Realizada:
+                                <span class="badge-status realizada">Realizada</span>
+                                break;
+                            case StatusConsulta.Cancelada:
+                                <span class="badge-status cancelada">Cancelada</span>
+                                break;
+                        }
+                    </td>
+                    <td>
+                        <div class="actions-row">
+                            <a class="btn btn-sm btn-ghost" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                            <a class="btn btn-sm btn-outline-ac" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>

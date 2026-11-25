@@ -1,0 +1,55 @@
+@model Consulta
+@{
+    ViewData["Title"] = "Nova consulta";
+}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="page-header centered">
+            <div>
+                <h1 class="page-title">Nova consulta</h1>
+            </div>
+        </div>
+
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="MedicoId" class="form-label"></label>
+                <select asp-for="MedicoId" class="form-select" asp-items="ViewBag.MedicoId">
+                    <option value="">Selecione o médico</option>
+                </select>
+                <span asp-validation-for="MedicoId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NomePaciente" class="form-label"></label>
+                <input asp-for="NomePaciente" class="form-control" />
+                <span asp-validation-for="NomePaciente" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="DataHora" class="form-label"></label>
+                <input asp-for="DataHora" class="form-control" type="datetime-local" />
+                <span asp-validation-for="DataHora" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Motivo" class="form-label"></label>
+                <input asp-for="Motivo" class="form-control" />
+                <span asp-validation-for="Motivo" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Status" class="form-label"></label>
+                <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<StatusConsulta>()"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-center">
+                <button type="submit" class="btn btn-ac text-white">Salvar</button>
+                <a class="btn btn-ghost" asp-action="Index">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

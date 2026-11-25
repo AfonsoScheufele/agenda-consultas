@@ -1,0 +1,36 @@
+@model Consulta
+@{
+    ViewData["Title"] = "Detalhes da consulta";
+}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="page-header centered">
+            <div>
+                <h1 class="page-title">Detalhes da consulta</h1>
+            </div>
+        </div>
+
+        <dl class="row">
+            <dt class="col-sm-4">@Html.DisplayNameFor(m => m.NomePaciente)</dt>
+            <dd class="col-sm-8">@Model.NomePaciente</dd>
+
+            <dt class="col-sm-4">Médico</dt>
+            <dd class="col-sm-8">@(Model.Medico?.Nome ?? "-")</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(m => m.DataHora)</dt>
+            <dd class="col-sm-8">@Model.DataHora.ToString("dd/MM/yyyy HH:mm")</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Motivo)</dt>
+            <dd class="col-sm-8">@Model.Motivo</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Status)</dt>
+            <dd class="col-sm-8">@Model.Status</dd>
+        </dl>
+
+        <div class="d-flex gap-2 justify-content-center">
+            <a class="btn btn-ac text-white" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+            <a class="btn btn-ghost" asp-action="Index">Voltar</a>
+        </div>
+    </div>
+</div>
